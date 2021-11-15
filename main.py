@@ -64,10 +64,9 @@ class Validator:
         return False
 
     def check_address(address: str) -> bool:
-        if re.match(r"^ул\.\s[а-яА-Я.\s\d-]+\s+[0-9]+$", address) is not None:
+        if re.match(r"[а-яА-Я.\s\d-]+\s+[0-9]+$", address) is not None:
             return True
         return False
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument('input', help="Название файла, с которого считаываются данные")
