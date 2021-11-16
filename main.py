@@ -22,49 +22,49 @@ class Validator:
     # /summary
 
     def check_email(email: str) -> bool:
-        if re.match(r"^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$", email) is not None:
+        if re.match(r"^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$", email):
             return True
         return False
 
     def check_weight(height: float) -> bool:
-        if re.match(r"1\.\d\d", str(height)) is not None:
+        if re.match(r"1\.\d\d", str(height)):
             if 1.30 < float(height) < 2.20:
                 return True
         return False
 
     def check_inn(inn: str) -> bool:
-        if re.match(r"[\d]{12}", inn) is not None:
+        if re.match(r"[\d]{12}", inn):
             return True
         return False
 
     def check_passport_series(passport_series: str) -> bool:
-        if re.match(r"\d\d[ ]\d\d", str(passport_series)) is not None:
+        if re.match(r"\d\d[ ]\d\d", str(passport_series)):
             return True
         return False
 
     def check_occupation(occupation: str) -> bool:
-        if re.match(r"^[\D]+", occupation) is not None:
+        if re.match(r"^[\D]+", occupation):
             return True
         return False
 
     def check_work_experience(work_experience: int) -> bool:
-        if re.match(r"^\d+", str(work_experience)) is not None:
+        if re.match(r"^\d+", str(work_experience)):
             if 0 < int(work_experience) < 100:
                 return True
         return False
 
     def check_political_views(political_views: str) -> bool:
-        if re.match(r"^\D+$", political_views) is not None:
+        if re.match(r"^\D+$", political_views):
             return True
         return False
 
     def check_worldview(worldview: str) -> bool:
-        if re.match(r"^\D+$", worldview) is not None:
+        if re.match(r"^\D+$", worldview):
             return True
         return False
 
     def check_address(address: str) -> bool:
-        if re.match(r"[а-яА-Я.\s\d-]+\s+[0-9]+$", address) is not None:
+        if re.match(r"[а-яА-Я.\s\d-]+\s+[0-9]+$", address):
             return True
         return False
 
@@ -87,37 +87,37 @@ address = 0
 
 validate_data = list()
 with tqdm(total=len(data)) as progressbar:
-    for i in data:
+    for person in data:
         field = True
-        if not Validator.check_email(i['email']):
+        if not Validator.check_email(person['email']):
             email += 1
             field = False
-        if not Validator.check_weight(i['height']):
+        if not Validator.check_weight(person['height']):
             height += 1
             field = False
-        if not Validator.check_inn(i['inn']):
+        if not Validator.check_inn(person['inn']):
             inn += 1
             field = False
-        if not Validator.check_passport_series(i['passport_series']):
+        if not Validator.check_passport_series(person['passport_series']):
             passport_series += 1
             field = False
-        if not Validator.check_occupation(i['occupation']):
+        if not Validator.check_occupation(person['occupation']):
             occupation += 1
             field = False
-        if not Validator.check_work_experience(i['work_experience']):
+        if not Validator.check_work_experience(person['work_experience']):
             work_experience += 1
             field = False
-        if not Validator.check_political_views(i['political_views']):
+        if not Validator.check_political_views(person['political_views']):
             political_views += 1
             field = False
-        if not Validator.check_worldview(i['worldview']):
+        if not Validator.check_worldview(person['worldview']):
             worldview += 1
             field = False
-        if not Validator.check_address(i['address']):
+        if not Validator.check_address(person['address']):
             address += 1
             field = False
         if field:
-            validate_data.append(i)
+            validate_data.append(person)
         progressbar.update(1)
 
 output_file = open(args.output, 'w')
